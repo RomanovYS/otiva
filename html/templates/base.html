@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Romanov Y.S.">
+    <meta name="description" content="Тестовый сайт по курсу Архитектура и шаблоны проектирования на Python">
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}{% endblock %} - на моём сайте</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <a href="/"><img src="home.gif" width="32" height="32" border="0" alt="На главную"></a>
+            <a href="/about/"><img src="about.gif" width="32" height="32" border="0" alt="О нас"></a>
+            <a href="/contacts/"><img src="contacts.gif" width="32" height="32" border="0" alt="Контакты"></a>
+            <a href="/register/"><img src="register.gif" width="32" height="32" border="0" alt="Регистрация"></a>
+        </div>
+
+        <div class="content">{% block content %}{% endblock %}</div>
+
+        <div class="footer">
+            {% block footer %}
+            <p> &copy; Copyright 2022 by <a href="https://gb.ru/users/3317375">R.Y.S.</a></p>
+            {% endblock %}
+        </div>
+
+    </div>
+
+</body>
+</html>
