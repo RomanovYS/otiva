@@ -9,8 +9,23 @@
 }
 
 h1 {
+    width: 80%;
     color: #205ade;
     padding: 50px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+p {
+    width: 80%;
+    text-align: center;
+}
+
+
+.form {
+    width: 300px;
+    text-align: center;
 }
 
 .header {
@@ -38,6 +53,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .container {

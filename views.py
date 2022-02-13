@@ -18,6 +18,9 @@ def contacts_view(request=None):
 def register_view(request=None):
     return '200 OK', render(path=main.folders_tree['templates'], template='register.html')
 
+def info_view(request=None):
+    return '200 OK', render(path=main.folders_tree['templates'], template='info.html')
+
 
 def page_404_view():
     return '404 NOT FOUND', render(path=main.folders_tree['templates'], template='page404.html')

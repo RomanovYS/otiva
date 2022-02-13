@@ -1,5 +1,4 @@
 import os
-from pprint import pprint
 
 import views
 from framework.core import Application
@@ -19,9 +18,10 @@ urlpatterns = {
     '/about/': views.about_view,
     '/contacts': views.contacts_view,
     '/contacts/': views.contacts_view,
-    # исключительно для демонстрации
-    # '/register': views.register_view,
-    # '/register/': views.register_view,
+    '/register': views.register_view,
+    '/register/': views.register_view,
+    '/info': views.info_view,
+    '/info/': views.info_view,
     '*': views.page_404_view
 }
 
