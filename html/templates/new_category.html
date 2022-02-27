@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Добавление новой категории{% endblock %}
+{% block head %}{% endblock %}
+{% block content %}
+    <h1>Добавление новой категории</h1>
+
+    <h3>Информация о доступных категориях курсов обучения</h3>
+    <ul>
+    {% for category in categories %}
+        <li>{{ category }}</li>
+    {% endfor %}
+    </ul>
+
+    <form class="form" method="POST" name="new_category" action="/new_category">
+        Название новой категории: <input type="text" name="new_category" size="40">
+        <input type="submit" value="Создать">
+    </form>
+    <p><a href="/new_course">Назад</a></p>
+{% endblock %}

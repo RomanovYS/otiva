@@ -8,26 +8,6 @@
     --hf-height: 60px;      /* высота хедера и футера */
 }
 
-h1 {
-    width: 80%;
-    color: #205ade;
-    padding: 50px;
-    margin-top: 10px;
-    text-align: center;
-}
-
-
-p {
-    width: 80%;
-    text-align: center;
-}
-
-
-.form {
-    width: 300px;
-    text-align: center;
-}
-
 .header {
     display: flex;
     background-color: var(--hf-color);
@@ -47,15 +27,6 @@ p {
     text-align: center;
 }
 
-.content {
-    min-height: calc(99.5vh - var(--hf-height)*2);
-    background-image: url(b_ground.png);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
 .container {
     max-width: 1200px;
     min-width: 900px;
@@ -65,5 +36,73 @@ p {
     border-radius: 5px;
 }
 
+.content {
+    min-height: calc(99.5vh - var(--hf-height)*2);
+    background-image: url(b_ground.png);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+h1 {
+    width: 80%;
+    color: #205ade;
+    padding: 50px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+h3 {
+    width: 80%;
+    color: #205ade;
+    padding: 50px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+p {
+    width: 80%;
+    text-align: center;
+}
+
+ol {
+    width: 50%;
+    margin-top: 0;
+}
+
+ul {
+    width: 30%;
+    margin-top: 0;
+    padding: 20px 200px;
+}
+
+li {
+    margin: 10px 0px
+}
+
+form {
+    width: 400px;
+    text-align: center;
+    padding: 20px 200px;
+}
 
 #img_not_page { box-shadow: 0px 0px 15px 10px #ddd;}
+
+.cat_list {
+    display: flex;
+    margin: 20px auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid rgb(140, 90, 255);
+}
+
+.cat_pcs {
+    display: inline-flex;
+    min-width: 30%;
+    max-width: 50%;
+    margin: 5px 5px;
+}

@@ -22,6 +22,10 @@ urlpatterns = {
     '/register/': views.register_view,
     '/info': views.info_view,
     '/info/': views.info_view,
+    '/new_category': views.n_cat_view,
+    '/new_category/': views.n_cat_view,
+    '/new_course': views.n_course_view,
+    '/new_course/': views.n_course_view,
     '*': views.page_404_view
 }
 
