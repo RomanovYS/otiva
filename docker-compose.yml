@@ -1,0 +1,30 @@
+version: "3.10"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    command: bash -c "
+      python otiva_project/manage.py migrate
+      && python otiva_project/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - SECRET_KEY=ba8k0+92@xre)4rjxvqbh6#@h^xp_!a2c!xzu1(xyc&lttqc(z
+      - DEBUG=True
+    depends_on:
+      - db
