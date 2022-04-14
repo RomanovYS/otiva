@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="d-flex justify-content-md-center">
+            <div class="">
+                <form action="" method="post">
+
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+                    <button class="form-control" type="submit">Войти</button>
+
+                </form>
+                <a href="{% url 'user_app:register' %}"><button class="form-control">Регистрация</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
