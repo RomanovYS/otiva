@@ -13,12 +13,9 @@ def index(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('user_app.urls')),
+    path('ads/', include('advertisement_app.urls')),
     path('', index),
 ]
-
-
-
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
