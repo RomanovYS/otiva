@@ -7,6 +7,8 @@ from advertisement_app.models import TechAdvertisement, TechPhoto
 
 
 class TechAdvertisementDetailView(DetailView):
+    """Страница объявления"""
+
     model = TechAdvertisement
     template_name = 'advertisement_app/detail.html'
 
@@ -16,6 +18,8 @@ class TechAdvertisementDetailView(DetailView):
 
 
 class TechAdvertisementCreateView(FormView):
+    """Создание объявления"""
+
     template_name = 'advertisement_app/create.html'
     form_class = TechAdvertisementCreateForm
     slug = None
@@ -32,6 +36,8 @@ class TechAdvertisementCreateView(FormView):
         new_advertisement.save()
         new_advertisement.slug = TechAdvertisement.create_slug(new_advertisement.title, new_advertisement.id)
 
+        # для каждого заргуженного фото создаём объект и записть в бд. 
+        # Затем связываем many-to-many с объектом объявления
         for photo in self.request.FILES.getlist('photos'):
             new_photo = TechPhoto.objects.create(photo=photo)
             new_photo.save()
@@ -47,6 +53,8 @@ class TechAdvertisementCreateView(FormView):
 
 
 class TechAdvertisementEditView(UpdateView):
+    """Страница редактирования объявления"""
+    
     model = TechAdvertisement
     template_name = 'advertisement_app/edit.html'
     form_class = TechAdvertisementEditForm

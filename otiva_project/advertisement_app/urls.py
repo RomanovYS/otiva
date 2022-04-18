@@ -1,4 +1,5 @@
 from django.urls import path
+
 from .views import TechAdvertisementCreateView, TechAdvertisementDetailView, TechAdvertisementEditView
 
 app_name = 'advertisement_app'
