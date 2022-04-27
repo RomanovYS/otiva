@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'user_app/css/register.css' %}">{% endblock %}
+{% block content %}
+    <div class="container">
+        <form class="form-register" action="{% url 'user_app:register' %}" method="post"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field.label }}
+                {{ field }}
+            {% endfor %}
+            <button class="form-control" type="submit">Регистрация</button>
+        </form>
+    </div>
+{% endblock %}
