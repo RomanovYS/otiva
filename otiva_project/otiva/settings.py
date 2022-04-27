@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'main_app',
     'user_app',
+    'advertisement_app',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'otiva.urls'
+
+# user accounts
+AUTH_USER_MODEL = 'user_app.OtivaUser'
 
 TEMPLATES = [
     {
@@ -126,7 +130,7 @@ STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
-    os.path.join(BASE_DIR, 'main_app', 'static'),
+    os.path.join(BASE_DIR, 'user_app', 'static'),
 ]
 
 
@@ -138,3 +142,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/auth/login/'
+
+
+
+# DOMAIN_NAME = 'http://127.0.0.1:8000'
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'
+#
+# EMAIL_HOST = 'smtp.mailtrap.io'
+# EMAIL_PORT = '465'
+# EMAIL_USE_TLS = True
+#
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
