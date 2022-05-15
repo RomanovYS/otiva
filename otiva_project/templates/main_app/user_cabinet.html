@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block content %}
+
+
+
+    <div class="title">
+        <h2 class="h2">Личный кабинет{% block cabinet_title %} - обо мне{% endblock %}</h2>
+    </div>
+
+    {% include 'main_app/includes/cabinet_menu.html' %}
+    {% block cabinet_content %}
+
+    {% endblock %}
+
+
+
+{% endblock %}

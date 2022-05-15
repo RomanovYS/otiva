@@ -1,21 +1,107 @@
-{% load static %}
 <!doctype html>
-<html lang="en">
+{% load static %}
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}" defer></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <title>{% block title %}Главная{% endblock %}</title>
+    <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static 'css/otiva.css' %}" rel="stylesheet">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/transition.min.js' %}"></script>
+    <script src="{% static 'js/carousel.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            {% for good in goods %}
+                $("#SlideShow{{ forloop.counter }}").bootstrapcarousel({interval: 3000});
+            {% endfor %}
 
-    {% block css %}{% endblock %}
-
-    <title>{% block title %}{{ title }}{% endblock %}</title>
+        });
+    </script>
 </head>
 <body>
-{% include 'includes/header.html' %}
-{% block content %}{% endblock %}
+
+<div class="container-fluid">
+
+    <!-- header -->
+
+    <div id="PageHeader1" class="d-flex justify-content-evenly align-items-center pe-4">
+
+        <a href="{% url 'main_app:main_page' %}">
+            <picture id="wb_Picture1">
+                <img src="{% static 'img/logo.gif' %}" id="Picture1" alt="" srcset="">
+            </picture>
+        </a>
+        <div class="flex-grow-1">
+            <select name="Combobox1" size="1" id="Combobox1">
+                <option selected value="Москва">Москва</option>
+                <option value="Санкт-Петербург">Санкт-Петербург</option>
+                <option value="Новосибирск">Новосибирск</option>
+                <option value="Екатеринбург">Екатеринбург</option>
+                <option value="Казань">Казань</option>
+                <option value="Нижний Новгород">Нижний Новгород</option>
+                <option value="Челябинск">Челябинск</option>
+                <option value="Самара">Самара</option>
+                <option value="Омск">Омск</option>
+                <option value="Ростов-на-Дону">Ростов-на-Дону</option>
+                <option value="Уфа">Уфа</option>
+                <option value="Красноярск">Красноярск</option>
+                <option value="Воронеж">Воронеж</option>
+                <option value="Пермь">Пермь</option>
+                <option value="Волгоград">Волгоград</option>
+            </select>
+            <input type="text" id="Editbox1"
+                   style="" name="Editbox1"
+                   value=""
+                   spellcheck="false">
+            <input type="submit" id="Button1" name="" value="Найти">
+        </div>
+        {% if user.is_authenticated %}
+
+            {#Данные пользователя#}
+            {% if user.avatar %}
+                <div id="user_avatar" class="me-3">
+                    <img class="user_avatar" src="{{ user.avatar.url }}" id="user_avatar_image" alt="user_avatar">
+                </div>
+            {% endif %}
+
+
+            <div id="wb_Text6" class="me-3">
+                <span style="color:#FFFFFF;font-family:Arial;font-size:13px;">
+                    <strong>{{ user.username }}<br>{{ user.user_type }}</strong>
+                </span>
+            </div>
+
+            <div class="personal_page me-2">
+                <a href="{% url 'main_app:cabinet' %}">
+                    <button type="button" class="btn btn-light btn-sm">Личный кабинет</button>
+                </a>
+            </div>
+
+
+            <input type="submit" id="logout_button"
+                   onclick="window.location.href='{% url 'user_app:logout' %}';return false;" name="submit"
+                   value="Выйти">
+        {% else %}
+            <input type="submit" id="login_button"
+                   onclick="window.location.href='{% url 'user_app:login' %}';return false;" name="submit"
+                   value="Войти">
+        {% endif %}
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="footer mt-auto py-5">
+        <div class="container text-center">
+            <span class="text-muted">Otiva group - {% now "Y" %}</span>
+        </div>
+    </footer>
+</div>
 
 </body>
 </html>
