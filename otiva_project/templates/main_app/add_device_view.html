@@ -1,0 +1,14 @@
+{% extends 'main_app/user_cabinet.html' %}
+{% block title %}Добавить устройство{% endblock %}
+{% block cabinet_title %}- новое устройство{% endblock %}
+{% block cabinet_content %}
+
+    <div class="container w-75 mt-md-5">
+        <form class="form-control p-5" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="btn btn-primary" value="Сохранить">
+        </form>
+    </div>
+
+{% endblock %}

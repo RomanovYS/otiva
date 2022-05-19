@@ -3,13 +3,13 @@ import uuid
 
 from django.db import models
 
-from user_app.models import Country, OtivaUser
+from user_app.models import OtivaUser
 
 
 class Manufacturer(models.Model):
     """Производитель"""
     name = models.CharField(max_length=100, unique=True, db_index=True, )
-    country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
+    country = models.CharField(max_length=100, null=True)
     
     def __str__(self):
         return self.name
@@ -43,7 +43,7 @@ class Device(models.Model):
     dev_model = models.CharField(max_length=100, verbose_name='Модель аппарата')
     dev_type = models.ForeignKey(DeviceType, on_delete=models.CASCADE, verbose_name='Тип аппарата')
     manuf = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, verbose_name='Производитель')
-    params = models.CharField(max_length=500, verbose_name='какие-то параметры')
+    params = models.TextField(verbose_name='какие-то параметры', blank=True, null=True)
     
     def __str__(self):
         return self.dev_model
@@ -58,7 +58,7 @@ class Good(models.Model):
     # private_owner =
     condition = models.ForeignKey(DeviceCondition, on_delete=models.CASCADE, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Цена', null=True)
-    posted = models.DateTimeField(verbose_name='Дата размещения')
+    posted = models.DateTimeField(verbose_name='Дата размещения', auto_now_add=True)
     period = models.SmallIntegerField(verbose_name='Размещено на срок', default=30)
     active = models.BooleanField(default=False, verbose_name='Идут показы')
     verified = models.BooleanField(default=False, verbose_name='Проверено модератором')
