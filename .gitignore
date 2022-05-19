@@ -235,3 +235,4 @@ dmypy.json
 cython_debug/
 
 /data/
+/otiva_project/media/*

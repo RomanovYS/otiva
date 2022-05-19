@@ -15,7 +15,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('user_app.urls')),
     path('ads/', include('advertisement_app.urls')),
-#     path('', index),
     path('', include('main_app.urls')),
 ]
 

@@ -1,0 +1,45 @@
+{% extends 'main_app/user_cabinet.html' %}
+{% block title %}{{ user.username }} - объявления{% endblock %}
+{% block cabinet_title %} - мои объявления{% endblock %}
+{% block cabinet_content %}
+
+    <div class="container pt-5">
+        {% if goods %}
+
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Товар</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Размещено</th>
+                    <th scope="col">Срок</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Опубликовано</th>
+                    <th scope="col">Удалить полностью</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for good in goods %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ good.device.dev_type }} {{ good.device.dev_model }}</td>
+                        <td>{{ good.price }}р</td>
+                        <td>{{ good.posted|date:"d/m/Y" }}</td>
+                        <td>{{ good.period }}дней</td>
+                        <td>{{ good.id }}</td>
+                        <td>{{ good.active|yesno:"Да,Нет" }}</td>
+                        <td><a href="#">Да</a></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        {% else %}
+            <p>Пока нет опубликованных объявлений</p>
+        {% endif %}
+    </div>
+{% endblock %}
