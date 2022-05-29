@@ -33,6 +33,13 @@ class OtivaUserRegisterView(View):
         form = self.form(request.POST)
         if form.is_valid():
             user = form.save()
+            
+            ########
+            # сразу активируем пользователя
+            user.is_active = True
+            user.save()
+            ###########
+            
             print(f'user {user.username} saved')
             return HttpResponseRedirect(reverse('user_app:login'))
         print(form.error_messages)
