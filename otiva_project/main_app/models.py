@@ -35,7 +35,6 @@ class Device(models.Model):
     dev_model = models.CharField(max_length=100, verbose_name='Модель аппарата')
     dev_type = models.ForeignKey(DeviceType, on_delete=models.CASCADE, verbose_name='Тип аппарата')
     manuf = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, verbose_name='Производитель')
-   
     params = models.TextField(verbose_name='какие-то параметры', blank=True, null=True)
     
     def __str__(self):
