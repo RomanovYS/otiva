@@ -15,15 +15,6 @@ class Manufacturer(models.Model):
         return self.name
 
 
-class DeviceCondition(models.Model):
-    """Состояние устройства"""
-    state_name = models.CharField(max_length=100, verbose_name='Название состояния')
-    description = models.CharField(max_length=255, verbose_name='Описание', null=True)
-    
-    def __str__(self):
-        return self.state_name
-
-
 class Firm(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название фирмы')
     inn = models.IntegerField(verbose_name='ИНН Компании')
@@ -40,6 +31,7 @@ class DeviceType(models.Model):
 
 
 class Device(models.Model):
+    
     dev_model = models.CharField(max_length=100, verbose_name='Модель аппарата')
     dev_type = models.ForeignKey(DeviceType, on_delete=models.CASCADE, verbose_name='Тип аппарата')
     manuf = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, verbose_name='Производитель')
@@ -51,12 +43,14 @@ class Device(models.Model):
 
 class Good(models.Model):
     """Таблица непосредственно товаров"""
+
+    CONDITIONS = [
+        ('Новый', 'Новый'),
+        ('Б/У', 'Б/У'),
+    ]
+
     owner = models.ForeignKey(OtivaUser, on_delete=models.CASCADE, verbose_name='Владелец объявления')
-    
-    # тут не совсем понятно как реализовывать будем
-    # corp_owner = models.ForeignKey()
-    # private_owner =
-    condition = models.ForeignKey(DeviceCondition, on_delete=models.CASCADE, null=True)
+    condition = models.CharField(max_length=20, choices=CONDITIONS, default='Новый')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Цена', null=True)
     posted = models.DateTimeField(verbose_name='Дата размещения', auto_now_add=True)
     period = models.SmallIntegerField(verbose_name='Размещено на срок', default=30)

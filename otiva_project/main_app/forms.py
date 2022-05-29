@@ -1,6 +1,5 @@
 from django import forms
-
-from main_app.models import Good, Device, Manufacturer, DeviceType, DeviceCondition
+from main_app.models import Good, Device, Manufacturer, DeviceType
 from user_app.models import OtivaUser
 
 
@@ -21,11 +20,11 @@ class AddGoodForm(forms.Form):
         widget=forms.widgets.Select(attrs={'class': 'form-select'})
     )
     
-    condition = forms.ModelChoiceField(
-        queryset=DeviceCondition.objects.all(),
-        label='Состояние',
-        widget=forms.widgets.Select(attrs={'class': 'form-select'}),
-    )
+
+    condition = forms.ChoiceField(
+        choices=Good.CONDITIONS,
+        widget=forms.widgets.Select(attrs={'class': 'form-select'}))
+
     model = forms.ModelChoiceField(
         queryset=Device.objects.all(),
         label='Модель',
@@ -73,7 +72,9 @@ class AddDeviceForm(forms.Form):
     dev_model = forms.CharField(max_length=100, label='Модель аппарата')
     dev_type = forms.CharField(max_length=100, label='Тип аппарата')
     manuf = forms.CharField(max_length=100, label='Производитель')
-    params = forms.CharField(max_length=100, label='Параметры')
+    
+    params = forms.CharField(max_length=3000, label='Параметры')
+
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
