@@ -45,6 +45,35 @@ class UserCabinetView(LoginRequiredMixin, View):
         }
         
         return render(request, self.template_name, context)
+    
+    def post(self, request):
+        form = UserPersonalDataForm(request.POST)
+        context = {'form': form}
+        user = OtivaUser.objects.get(id=request.user.id)
+        images = request.FILES.getlist('avatar')
+        
+        if form.is_valid():
+            print('hello')
+            if images:
+                user.avatar = images[0]
+                
+            user.user_type = form.cleaned_data['user_type']
+            user.profile.first_name = form.cleaned_data['first_name']
+            user.profile.surname = form.cleaned_data['surname']
+            user.profile.phone_num = form.cleaned_data['phone']
+            user.address.city = form.cleaned_data['city']
+            user.address.area = form.cleaned_data['area']
+            user.address.post = form.cleaned_data['post_code']
+            user.address.street = form.cleaned_data['street']
+            user.address.building = form.cleaned_data['building']
+            user.address.room = form.cleaned_data['apartment']
+            user.address.metro = form.cleaned_data['metro']
+            
+            user.profile.save()
+            user.address.save()
+            user.save()
+        
+        return render(request, self.template_name, context)
 
 
 class UserGoodsView(LoginRequiredMixin, ListView):

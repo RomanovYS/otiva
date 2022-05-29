@@ -80,8 +80,9 @@
                                 <span class="carousel-control-next-icon bg-black"></span>
                             </button>
                         </div>
-                        <div class="container">
-                            <button class="btn btn-primary">Подробнее</button>
+
+                        <div class="container d-flex justify-content-center">
+                            <button class="btn btn-light center mb-5">Подробнее</button>
                         </div>
                     </div>
 
@@ -91,12 +92,16 @@
                             <p class="card-text">{{ good.description }}</p>
                             <div class="row">
                                 <div class="col">
-                                    <p>Город: {{ good.owner.address.city }}</p>
-                                    <p>Тел: {{ good.owner.address.corporate_phone }}</p>
+                                    <p>Город: {{ good.owner.address.city|default_if_none:'Не указано' }}</p>
+                                    <p>Тел: {{ good.owner.profile.phone_num|default:'Не указан' }}</p>
                                 </div>
                                 <div class="col">
                                     <p>Состояние: {{ good.condition }}</p>
-                                    <p>Статус: {{ good.owner }}</p>
+                                    {% if good.owner.profile.first_name %}
+                                        <p>Владелец: {{ good.owner.profile.first_name }}</p>
+                                    {% else %}
+                                        <p>Владелец: {{ good.owner.username }}</p>
+                                    {% endif %}
                                 </div>
                                 <div class="col">
                                     <p>Цена: {{ good.price }}</p>
