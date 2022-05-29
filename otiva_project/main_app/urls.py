@@ -9,4 +9,5 @@ urlpatterns = [
     path('my_advert/', main_app.UserGoodsView.as_view(), name='my_advert'),
     path('add_good/', main_app.AddGoodView.as_view(), name='add_good'),
     path('add_device/', main_app.AddDeviceView.as_view(), name='add_device'),
+    path('detail/<int:pk>/', main_app.GoodDetailView.as_view(), name='good_detail'),
 ]

@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from main_app.forms import AddGoodForm, AddDeviceForm, UserPersonalDataForm
 
 from main_app.models import Good, GoodPhoto
@@ -154,3 +154,10 @@ class AddDeviceView(LoginRequiredMixin, View):
             return redirect(reverse('main_app:add_good'))
         else:
             return render(request, self.template_name, context)
+        
+        
+class GoodDetailView(DetailView):
+    
+    template_name = 'main_app/good_detail.html'
+    model = Good
+    context_object_name = 'good'

@@ -149,3 +149,20 @@ h6, .h6 {
     vertical-align: middle;
 }
 
+.good_detail_text {
+    color: #000000;
+    font-family: Arial;
+    font-size: 19px;
+    line-height: 27px;
+}
+
+.good_price {
+    color: #00008B;
+    font-family: Arial;
+    font-size: 35px;
+    line-height: 32px;
+}
+
+.description_grey {
+    color: #696969;
+}
