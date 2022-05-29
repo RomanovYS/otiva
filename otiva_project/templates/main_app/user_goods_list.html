@@ -17,6 +17,7 @@
                     <th scope="col">Срок</th>
                     <th scope="col">ID</th>
                     <th scope="col">Опубликовано</th>
+                    <th scope="col">Модерация</th>
                     <th scope="col">Удалить полностью</th>
                 </tr>
                 </thead>
@@ -25,12 +26,13 @@
                 {% for good in goods %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ good.device.dev_type }} {{ good.device.dev_model }}</td>
+                        <td><a href="#" class="text-reset text-decoration-none">{{ good.device.dev_type }} {{ good.device.dev_model }}</a></td>
                         <td>{{ good.price }}р</td>
                         <td>{{ good.posted|date:"d/m/Y" }}</td>
                         <td>{{ good.period }}дней</td>
                         <td>{{ good.id }}</td>
                         <td>{{ good.active|yesno:"Да,Нет" }}</td>
+                        <td>{{ good.get_verified_display }}</td>
                         <td><a href="#">Да</a></td>
                     </tr>
                 {% endfor %}

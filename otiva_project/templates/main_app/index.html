@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Главная - Otiva{% endblock %}
 
 {% block content %}
@@ -56,17 +57,23 @@
 
                             <!-- The slideshow/carousel -->
                             <div class="carousel-inner">
-                                {% for image in good.good_photos.all %}
-                                    {% if forloop.counter0 == 0 %}
-                                        <div class="carousel-item active">
-                                            <img src="{{ image.image.url }}" alt="Los Angeles" class="w-100">
-                                        </div>
-                                    {% else %}
-                                        <div class="carousel-item">
-                                            <img src="{{ image.image.url }}" alt="Los Angeles" class="w-100">
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
+                                {% if good.good_photos.all %}
+                                    {% for image in good.good_photos.all %}
+                                        {% if forloop.counter0 == 0 %}
+                                            <div class="carousel-item active">
+                                                <img src="{{ image.image.url }}" alt="printer" class="w-100">
+                                            </div>
+                                        {% else %}
+                                            <div class="carousel-item">
+                                                <img src="{{ image.image.url }}" alt="printer" class="w-100">
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="carousel-item active">
+                                        <img src="{% static 'img/default_printer.png' %}" alt="printer" class="w-100">
+                                    </div>
+                                {% endif %}
 
                             </div>
 
@@ -82,7 +89,9 @@
                         </div>
 
                         <div class="container d-flex justify-content-center">
-                            <a href="{% url 'main_app:good_detail' good.id %}"><button class="btn btn-light center mb-5">Подробнее</button></a>
+                            <a href="{% url 'main_app:good_detail' good.id %}">
+                                <button class="btn btn-light center mb-5">Подробнее</button>
+                            </a>
                         </div>
                     </div>
 

@@ -48,6 +48,11 @@ class Good(models.Model):
         ('Новый', 'Новый'),
         ('Б/У', 'Б/У'),
     ]
+    MODERATION_STATUS = [
+        ('in_progress', 'На модерации'),
+        ('approved', 'Одобрено'),
+        ('declined', 'Требуется редактирование')
+    ]
 
     owner = models.ForeignKey(OtivaUser, on_delete=models.CASCADE, verbose_name='Владелец объявления')
     condition = models.CharField(max_length=20, choices=CONDITIONS, default='Новый')
@@ -55,7 +60,7 @@ class Good(models.Model):
     posted = models.DateTimeField(verbose_name='Дата размещения', auto_now_add=True)
     period = models.SmallIntegerField(verbose_name='Размещено на срок', default=30)
     active = models.BooleanField(default=False, verbose_name='Идут показы')
-    verified = models.BooleanField(default=False, verbose_name='Проверено модератором')
+    verified = models.CharField(max_length=50, choices=MODERATION_STATUS, default='in_progress')
     description = models.TextField(blank=True, null=True, default='Нет описания', verbose_name='Описание товара')
     device = models.ForeignKey(Device, on_delete=models.CASCADE, verbose_name='Конкретный экземпляр техники', null=True)
     

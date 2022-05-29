@@ -14,7 +14,8 @@ class MainPageView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['goods'] = Good.objects.all()
+        goods = Good.objects.filter(verified='approved', active=True)
+        context['goods'] = goods
         return context
 
 
