@@ -31,7 +31,6 @@ class DeviceType(models.Model):
 
 
 class Device(models.Model):
-    
     dev_model = models.CharField(max_length=100, verbose_name='Модель аппарата')
     dev_type = models.ForeignKey(DeviceType, on_delete=models.CASCADE, verbose_name='Тип аппарата')
     manuf = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, verbose_name='Производитель')
@@ -43,7 +42,7 @@ class Device(models.Model):
 
 class Good(models.Model):
     """Таблица непосредственно товаров"""
-
+    
     CONDITIONS = [
         ('Новый', 'Новый'),
         ('Б/У', 'Б/У'),
@@ -53,18 +52,24 @@ class Good(models.Model):
         ('approved', 'Одобрено'),
         ('declined', 'Требуется редактирование')
     ]
-
+    
     owner = models.ForeignKey(OtivaUser, on_delete=models.CASCADE, verbose_name='Владелец объявления')
     condition = models.CharField(max_length=20, choices=CONDITIONS, default='Новый')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Цена', null=True)
     posted = models.DateTimeField(verbose_name='Дата размещения', auto_now_add=True)
     period = models.SmallIntegerField(verbose_name='Размещено на срок', default=30)
     active = models.BooleanField(default=False, verbose_name='Идут показы')
-    verified = models.CharField(max_length=50, choices=MODERATION_STATUS, default='in_progress')
+    verified = models.CharField(
+        max_length=50,
+        choices=MODERATION_STATUS,
+        default='in_progress',
+        verbose_name='Статус проверки'
+    )
     description = models.TextField(blank=True, null=True, default='Нет описания', verbose_name='Описание товара')
     device = models.ForeignKey(Device, on_delete=models.CASCADE, verbose_name='Конкретный экземпляр техники', null=True)
     
-    # part_num = verbose_name = 'Номер запчасти', null = True
+    # is_deleted = models.BooleanField(verbose_name='Удалено', default=False),
+    
     def __str__(self):
         return f'{self.device.dev_model} - {self.price}'
 

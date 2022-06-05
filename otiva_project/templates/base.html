@@ -63,11 +63,13 @@
         {% if user.is_authenticated %}
 
             {#Данные пользователя#}
-            {% if user.avatar %}
-                <div id="user_avatar" class="me-3">
+            <div id="user_avatar" class="me-3">
+                {% if user.avatar %}
                     <img class="user_avatar" src="{{ user.avatar.url }}" id="user_avatar_image" alt="user_avatar">
-                </div>
-            {% endif %}
+                {% else %}
+                    <img class="user_avatar" src="{% static 'default_avatar.png' %}" id="user_avatar_image" alt="user_avatar">
+                {% endif %}
+            </div>
 
 
             <div id="wb_Text6" class="me-3">

@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block css %}<link rel="stylesheet" href="{% static 'user_app/css/register.css' %}">{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'user_app/css/register.css' %}">{% endblock %}
 {% block content %}
-    <div class="container p-5">
+    <div class="container w-25">
         <form class="form-register" action="{% url 'user_app:register' %}" method="post"
               enctype="multipart/form-data">
             {% csrf_token %}
@@ -12,7 +13,7 @@
                 {{ field.label }}
                 {{ field }}
             {% endfor %}
-            <button class="form-control" type="submit">Регистрация</button>
+            <button class="form-control mt-2 btn btn-primary" type="submit">Регистрация</button>
         </form>
     </div>
 {% endblock %}

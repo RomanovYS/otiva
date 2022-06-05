@@ -10,4 +10,7 @@ urlpatterns = [
     path('add_good/', main_app.AddGoodView.as_view(), name='add_good'),
     path('add_device/', main_app.AddDeviceView.as_view(), name='add_device'),
     path('detail/<int:pk>/', main_app.GoodDetailView.as_view(), name='good_detail'),
+    path('delete/<int:pk>/', main_app.GoodDeleteView.as_view(), name='good_delete'),
+    path('publish/<int:pk>/', main_app.publish_good, name='good_publish'),
+    path('unpublish/<int:pk>/', main_app.unpublish_good, name='good_unpublish'),
 ]

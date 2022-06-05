@@ -12,18 +12,18 @@ class OtivaUserRegisterForm(UserCreationForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
     
     class Meta:
         model = OtivaUser
-        fields = ('username', 'email', 'password1', 'password2', 'avatar')
+        fields = ('username', 'email', 'password1', 'password2')
     
     def save(self, commit=True):
         user = super().save()
         
-        user.is_active = False
+        user.is_active = True
         salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
         user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
         user.save()
@@ -36,11 +36,7 @@ class OtivaUserLoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'class': 'form-control'})
         self.fields['password'].widget.attrs.update({'class': 'form-control'})
-
+    
     class Meta:
         model = OtivaUser
         fields = ('username', 'password')
-       
-    
-        
-    

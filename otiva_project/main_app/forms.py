@@ -20,11 +20,10 @@ class AddGoodForm(forms.Form):
         widget=forms.widgets.Select(attrs={'class': 'form-select'})
     )
     
-
     condition = forms.ChoiceField(
         choices=Good.CONDITIONS,
         widget=forms.widgets.Select(attrs={'class': 'form-select'}))
-
+    
     model = forms.ModelChoiceField(
         queryset=Device.objects.all(),
         label='Модель',
@@ -74,7 +73,6 @@ class AddDeviceForm(forms.Form):
     manuf = forms.CharField(max_length=100, label='Производитель')
     
     params = forms.CharField(max_length=3000, label='Параметры')
-
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -116,11 +114,6 @@ class UserPersonalDataForm(forms.Form):
     metro = forms.CharField(max_length=50, label='Метро', required=False)
     map_url = forms.CharField(max_length=50, label='Ссылка на Яндекс Карты', required=False)
     
-    
-    
-    
-
-    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['user_type'].widget.attrs.update({'class': 'form-select'})
@@ -128,5 +121,3 @@ class UserPersonalDataForm(forms.Form):
         for field in self.fields:
             if field != 'user_type':
                 self.fields[field].widget.attrs.update({'class': 'form-control'})
-        
-    

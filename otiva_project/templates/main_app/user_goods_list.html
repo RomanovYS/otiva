@@ -26,14 +26,20 @@
                 {% for good in goods %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td><a href="#" class="text-reset text-decoration-none">{{ good.device.dev_type }} {{ good.device.dev_model }}</a></td>
+                        <td><a href="{% url 'main_app:good_detail' good.id %}" class="text-reset text-decoration-none">{{ good.device.dev_type }} {{ good.device.dev_model }}</a></td>
                         <td>{{ good.price }}р</td>
                         <td>{{ good.posted|date:"d/m/Y" }}</td>
                         <td>{{ good.period }}дней</td>
                         <td>{{ good.id }}</td>
-                        <td>{{ good.active|yesno:"Да,Нет" }}</td>
+                         <td>{{ good.active|yesno:"Да,Нет" }}
+                             {% if good.active %}
+                                 <a href="{% url 'main_app:good_unpublish' good.id %}">Снять</a>
+                             {% else %}
+                                 <a href="{% url 'main_app:good_publish' good.id %}">Опубликовать</a>
+                             {% endif %}
+                        </td>
                         <td>{{ good.get_verified_display }}</td>
-                        <td><a href="#">Да</a></td>
+                        <td><a href="{% url 'main_app:good_delete' good.id %}">Да</a></td>
                     </tr>
                 {% endfor %}
 

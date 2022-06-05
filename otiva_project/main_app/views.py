@@ -1,8 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse, reverse_lazy
+from django.utils.functional import lazy
 from django.views import View
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, DeleteView
 from main_app.forms import AddGoodForm, AddDeviceForm, UserPersonalDataForm
 
 from main_app.models import Good, GoodPhoto
@@ -157,8 +160,34 @@ class AddDeviceView(LoginRequiredMixin, View):
             return render(request, self.template_name, context)
         
         
-class GoodDetailView(DetailView):
+class GoodDetailView(LoginRequiredMixin, DetailView):
     
     template_name = 'main_app/good_detail.html'
     model = Good
     context_object_name = 'good'
+
+
+class GoodDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'main_app/delete_good.html'
+    model = Good
+    success_url = reverse_lazy('main_app:my_advert')
+    
+
+@login_required
+def publish_good(request, pk):
+    """Публикация сообщения"""
+    good = get_object_or_404(Good, pk=pk)
+    good.active = True
+    good.save()
+    
+    return HttpResponseRedirect(reverse('main_app:my_advert'))
+
+
+@login_required
+def unpublish_good(request, pk):
+    """Публикация сообщения"""
+    good = get_object_or_404(Good, pk=pk)
+    good.active = False
+    good.save()
+    
+    return HttpResponseRedirect(reverse('main_app:my_advert'))
